@@ -26,6 +26,7 @@ $ docker run --name web0 -p 8080:80  -v $PWD:/var/www/html moodlehq/moodle-php-a
 * Preconfigured with all php extensions required for Moodle development and all database drivers
 * Serves wwroot configured at /var/www/html/
 * Verified by [automated tests](https://travis-ci.org/moodlehq/moodle-php-apache)
+* Ready to use [xdebug](https://xdebug.org/) installation
 
 # Directories
 

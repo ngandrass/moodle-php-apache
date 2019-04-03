@@ -73,6 +73,17 @@ ACCEPT_EULA=Y apt-get install -y msodbcsql17
 pecl install sqlsrv
 docker-php-ext-enable sqlsrv
 
+# Install and configure xdebug.
+pecl install xdebug
+docker-php-ext-enable xdebug
+chmod +x $(find /usr/local/lib/php/extensions/ -name xdebug.so) # Executable flag on xdebug.so is required by webserver
+cat >/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini  <<EOL
+zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)
+xdebug.remote_enable=on
+xdebug.remote_autostart=off
+xdebug.remote_connect_back=1
+EOL
+
 # Keep our image size down..
 pecl clear-cache
 apt-get remove --purge -y $BUILD_PACKAGES
